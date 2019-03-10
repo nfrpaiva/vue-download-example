@@ -10,7 +10,10 @@ es6Promise.polyfill();
 //Hack para o fetch funcionar no IE
 import 'whatwg-fetch';
 //Hack para o fetch funcionar no IE
+import Resource from 'vue-resource';
+
 Vue.config.productionTip = false;
+Vue.use(Resource);
 Vue.use(BootstrapVue);
 new Vue({
 	render: (h) => h(App)

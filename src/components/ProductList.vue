@@ -18,7 +18,9 @@
       
       <button class="btn btn-success" @click="handleDownloadAxios">Download usin Axios</button>
       
-      <button class="btn btn-warning" @click="handleDownloadHRef">Download usin HRef</button>
+      <button class="btn btn-warning" @click="handleDownloadResource">Download usin Resource</button>
+      
+      <button class="btn btn-primary" @click="handleDownloadHRef">Download usin HRef</button>
     </fieldset>
     <div class="aguarde">
       <h1>Aguarde</h1>
@@ -29,9 +31,11 @@
 /* eslint-disable */
 import axios from "axios";
 import request from "request";
+import downloads from "../resources/download";
 export default {
   name: "ProductList",
   components: {},
+  mounted() {},
   methods: {
     aguarde(enable) {
       if (enable) {
@@ -104,6 +108,25 @@ export default {
           console.log("finally");
           this.aguarde(false);
         });
+    },
+    handleDownloadResource() {
+      this.aguarde(true);
+      let filename;
+      /*
+       * Verificar a configuração de options para o formato blob no arquivo ../resources/download.js.
+       */
+      downloads
+        .pdf()
+        .then(res => {
+          let header = res.headers.get("Content-Disposition") || "";
+          filename = this.getHeaderFileName(header);
+          return res.blob();
+        })
+        .then(blob => {
+          this.createElementWithBlob(blob, filename);
+        })
+        .catch(e => console.log("vue-resources erro: ", e))
+        .finally(() => this.aguarde(false));
     }
   },
   data() {
