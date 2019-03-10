@@ -26,6 +26,7 @@
   </div>
 </template>
 <script>
+/* eslint-disable */
 import axios from "axios";
 import request from "request";
 export default {
