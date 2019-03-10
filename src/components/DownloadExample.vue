@@ -1,18 +1,6 @@
 <template>
   <div class="container">
-    <h1>Product List</h1>
-    <table class="table">
-      <thead>
-        <th>id</th>
-        <th>Nome</th>
-      </thead>
-      <tbody>
-        <tr v-for="item in dados" :key="item.id">
-          <td>{{item.id}}</td>
-          <td>{{item.descricao}}</td>
-        </tr>
-      </tbody>
-    </table>
+    <h1>Exemplos de como Fazer download de arquivos com Vue.js</h1>
     <fieldset :disabled="aguardando">
       <button class="btn btn-primary" @click="handleDownloadFetch">Download using fetch</button>
       
@@ -33,7 +21,7 @@ import axios from "axios";
 import request from "request";
 import downloads from "../resources/download";
 export default {
-  name: "ProductList",
+  name: "DownloadExample",
   components: {},
   mounted() {},
   methods: {
@@ -169,5 +157,8 @@ table {
   background-color: white;
   border-radius: 6px;
   box-shadow: 2px 2px 2px rgb(0, 0, 0, 0.25);
+}
+.container {
+  margin-top: 40vh;
 }
 </style>
