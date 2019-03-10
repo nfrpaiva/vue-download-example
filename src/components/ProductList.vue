@@ -95,4 +95,8 @@ export default {
 .btn {
   margin: 3px;
 }
+table {
+  width: 60vw;
+  margin: 0% auto;
+}
 </style>
