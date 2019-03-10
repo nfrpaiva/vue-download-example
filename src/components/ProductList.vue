@@ -61,6 +61,7 @@ export default {
       el.remove();
     },
     handleDownloadHRef() {
+      this.aguarde(true);
       window.location.assign("/pdf/spring-boot-reference.pdf");
     },
     handleDownloadAxios() {
