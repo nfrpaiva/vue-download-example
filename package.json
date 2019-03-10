@@ -11,6 +11,7 @@
     "axios": "^0.18.0",
     "bootstrap": "^4.3.1",
     "bootstrap-vue": "^2.0.0-rc.14",
+    "es6-promise": "^4.2.6",
     "request": "^2.88.0",
     "vue": "^2.6.8"
   },

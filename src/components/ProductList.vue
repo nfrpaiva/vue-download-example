@@ -52,13 +52,17 @@ export default {
     },
     createElementWithBlob(blob, filename) {
       const el = document.createElement("a");
-      el.href = window.URL.createObjectURL(blob);
-      el.download = filename;
-      //Necessário para funcionar no Firefox
-      document.body.appendChild(el);
-      el.click();
-      //Importante remover o elemento para não consumir/reter muita memória
-      el.remove();
+      // Internet Explorer 11 Hack
+      if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+        window.navigator.msSaveOrOpenBlob(blob, filename);
+      } else {
+        el.href = window.URL.createObjectURL(blob);
+        el.download = filename;
+        //Necessário para funcionar no Firefox
+        document.body.appendChild(el);
+        el.click();
+        el.remove();
+      }
     },
     handleDownloadHRef() {
       this.aguarde(true);
@@ -76,9 +80,8 @@ export default {
           let blob = new Blob([res.data], { type: "application/pdf" });
           this.createElementWithBlob(blob, filename);
         })
-        .catch(e => console.log(e))
+        .catch(e => console.log("handleDownloadAxios- Erro", e))
         .finally(() => {
-          console.log("finally");
           this.aguarde(false);
         });
     },
