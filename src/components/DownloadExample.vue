@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1>Exemplos de como Fazer download de arquivos com Vue.js</h1>
+    <h1>Exemplos de como se fazer download de arquivos com Vue.js</h1>
     <fieldset :disabled="aguardando">
       <button class="btn btn-primary" @click="handleDownloadFetch">Download using fetch</button>
       
