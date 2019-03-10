@@ -5,7 +5,7 @@
       <button class="btn btn-primary" @click="handleDownloadFetch">Download using fetch</button>
       <button class="btn btn-success" @click="handleDownloadAxios">Download usin Axios</button>
       <button class="btn btn-warning" @click="handleDownloadResource">Download usin Resource</button>
-      <button class="btn btn-primary" @click="handleDownloadHRef">Download usin HRef</button>
+      <button class="btn btn-info" @click="handleDownloadHRef">Download usin HRef</button>
     </fieldset>
     <div class="aguarde">
       <h1>Aguarde</h1>
@@ -168,5 +168,10 @@ table {
 }
 .container {
   margin-top: 40vh;
+  background-color: #e8e7e7;
+  padding: 1rem;
+}
+h1 {
+  color: var(--gray);
 }
 </style>
