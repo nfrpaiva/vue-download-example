@@ -3,11 +3,8 @@
     <h1>Exemplos de como se fazer download de arquivos com Vue.js</h1>
     <fieldset :disabled="aguardando">
       <button class="btn btn-primary" @click="handleDownloadFetch">Download using fetch</button>
-      
       <button class="btn btn-success" @click="handleDownloadAxios">Download usin Axios</button>
-      
       <button class="btn btn-warning" @click="handleDownloadResource">Download usin Resource</button>
-      
       <button class="btn btn-primary" @click="handleDownloadHRef">Download usin HRef</button>
     </fieldset>
     <div class="aguarde">
@@ -36,7 +33,7 @@ export default {
     },
     getHeaderFileName(contentDisposition) {
       if (!contentDisposition) {
-        return "defaultname.pdf";
+        return;
       }
       let result = contentDisposition
         .split("filename=")[1]
@@ -68,8 +65,12 @@ export default {
           responseType: "arraybuffer"
         })
         .then(res => {
-          let header = res.headers["content-disposition"] || "";
+          let header = res.headers["content-disposition"];
           let filename = this.getHeaderFileName(header);
+          if (!filename) {
+            let arry = res.config.url.split("/");
+            filename = arry[arry.length - 1];
+          }
           let blob = new Blob([res.data], { type: "application/pdf" });
           this.createElementWithBlob(blob, filename);
         })
@@ -86,6 +87,10 @@ export default {
         .then(res => {
           let header = res.headers.get("Content-Disposition") || "";
           filename = this.getHeaderFileName(header);
+          if (!filename) {
+            let arry = res.url.split("/");
+            filename = arry[arry.length - 1];
+          }
           return res.blob();
         })
         .then(blob => {
@@ -93,7 +98,6 @@ export default {
         })
         .catch(e => console.log(e))
         .finally(() => {
-          console.log("finally");
           this.aguarde(false);
         });
     },
@@ -106,8 +110,12 @@ export default {
       downloads
         .pdf()
         .then(res => {
-          let header = res.headers.get("Content-Disposition") || "";
+          let header = res.headers.get("Content-Disposition");
           filename = this.getHeaderFileName(header);
+          if (!filename) {
+            let arry = res.url.split("/");
+            filename = arry[arry.length - 1];
+          }
           return res.blob();
         })
         .then(blob => {
