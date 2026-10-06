@@ -1,29 +1,19 @@
 # vue-download-example
 
-## Project setup
+Exemplos de download de arquivos com Vue 3 (`<script setup>`, Composition API) e Vite:
+`fetch`, Axios e link direto (href).
+
+## Requisitos
+Node.js >= 20.19
+
+## Scripts
 ```
-yarn install
+npm install
+npm run dev      # desenvolvimento (proxy /pdf -> docs.spring.io)
+npm run build    # build de produção
+npm run preview  # pré-visualiza o build
+npm run lint
 ```
 
-### Compiles and hot-reloads for development
-```
-yarn run serve
-```
-
-### Compiles and minifies for production
-```
-yarn run build
-```
-
-### Run your tests
-```
-yarn run test
-```
-
-### Lints and fixes files
-```
-yarn run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+A lógica de download fica em `src/composables/useDownload.js` e os utilitários
+(nome do arquivo, salvar Blob) em `src/utils/download.js`.
